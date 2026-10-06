@@ -1,0 +1,39 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1"]
+[ext_resource type="Resource" path="res://data/player_tuning.tres" id="2"]
+[ext_resource type="Script" path="res://scripts/player/player_movement.gd" id="3"]
+[ext_resource type="Texture2D" path="res://art_placeholder/player.svg" id="4"]
+[ext_resource type="Script" path="res://scripts/player/player_visual.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/player/player_follow_camera.gd" id="6"]
+
+[sub_resource type="RectangleShape2D" id="BodyShape"]
+size = Vector2(22.4, 51.2)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_snap_length = 2.0
+script = ExtResource("1")
+tuning = ExtResource("2")
+
+[node name="Visual" type="Sprite2D" parent="."]
+position = Vector2(0, -28.8)
+texture = ExtResource("4")
+script = ExtResource("5")
+
+[node name="BodyCollider" type="CollisionShape2D" parent="."]
+position = Vector2(0, -25.6)
+shape = SubResource("BodyShape")
+
+[node name="Movement" type="Node" parent="."]
+script = ExtResource("3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
+process_callback = 0
+limit_left = -32
+limit_top = -256
+limit_right = 1056
+limit_bottom = 448
+script = ExtResource("6")

@@ -1,0 +1,138 @@
+[gd_scene format=3 uid="uid://cs7dotgtwnnm"]
+
+[ext_resource type="Script" uid="uid://bhsj70apytyqe" path="res://scripts/test_room/test_room.gd" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/player/Player.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://scenes/test_room/GrayboxPlatform.tscn" id="3"]
+
+[node name="TestRoom" type="Node2D" unique_id=340551790]
+script = ExtResource("1")
+
+[node name="Geometry" type="Node2D" parent="." unique_id=1683908858]
+
+[node name="LowerSafetyFloor" parent="Geometry" unique_id=1205745397 instance=ExtResource("3")]
+position = Vector2(-32, 384)
+size_du = Vector2(34, 2)
+
+[node name="LeftBoundary" parent="Geometry" unique_id=593839545 instance=ExtResource("3")]
+position = Vector2(-32, -256)
+size_du = Vector2(1, 20)
+
+[node name="RightBoundary" parent="Geometry" unique_id=185503417 instance=ExtResource("3")]
+position = Vector2(1024, -256)
+size_du = Vector2(1, 20)
+
+[node name="Zone_A_Movement" type="Node2D" parent="." unique_id=2105903395]
+
+[node name="FlatRunwayAndApproach" parent="Zone_A_Movement" unique_id=621229440 instance=ExtResource("3")]
+size_du = Vector2(14, 0.75)
+
+[node name="SmallStep" parent="Zone_A_Movement" unique_id=585242024 instance=ExtResource("3")]
+position = Vector2(240, -22.4)
+size_du = Vector2(1, 0.7)
+
+[node name="StandardPlatform" parent="Zone_A_Movement" unique_id=1737042453 instance=ExtResource("3")]
+position = Vector2(320, -72)
+size_du = Vector2(2, 0.4)
+tint = Color(0.3, 0.46, 0.48, 1)
+
+[node name="NearLimitBase" parent="Zone_A_Movement" unique_id=54376576 instance=ExtResource("3")]
+position = Vector2(488, 0)
+size_du = Vector2(2.75, 0.75)
+
+[node name="NearLimitPlatform" parent="Zone_A_Movement" unique_id=1186425014 instance=ExtResource("3")]
+position = Vector2(528, -100.8)
+size_du = Vector2(1.5, 0.35)
+tint = Color(0.55, 0.43, 0.28, 1)
+
+[node name="LongGapLandingAndDropLedge" parent="Zone_A_Movement" unique_id=243908412 instance=ExtResource("3")]
+position = Vector2(688, 0)
+size_du = Vector2(2.5, 0.75)
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=1956747006]
+position = Vector2(48, 0)
+
+[node name="TestPoints" type="Node2D" parent="." unique_id=168717098]
+
+[node name="Coyote" type="Marker2D" parent="TestPoints" unique_id=694074555]
+position = Vector2(424, 0)
+
+[node name="Standard" type="Marker2D" parent="TestPoints" unique_id=1672457759]
+position = Vector2(296, 0)
+
+[node name="NearLimit" type="Marker2D" parent="TestPoints" unique_id=1555911132]
+position = Vector2(504, 0)
+
+[node name="Drop" type="Marker2D" parent="TestPoints" unique_id=482145409]
+position = Vector2(736, 0)
+
+[node name="Player" parent="." unique_id=1857088116 instance=ExtResource("2")]
+position = Vector2(48, 0)
+
+[node name="Labels" type="Node2D" parent="." unique_id=484383810]
+
+[node name="Runway" type="Label" parent="Labels" unique_id=1338292123]
+offset_left = 12.0
+offset_top = 18.0
+theme_override_colors/font_color = Color(0.7, 0.8, 0.86, 1)
+theme_override_font_sizes/font_size = 13
+text = "1  FLAT RUN / STOP / TURN
+7 DU clear runway | grid = 1 DU"
+
+[node name="Step" type="Label" parent="Labels" unique_id=111019705]
+offset_left = 218.0
+offset_top = -52.0
+theme_override_font_sizes/font_size = 12
+text = "STEP 0.7 DU"
+
+[node name="Standard" type="Label" parent="Labels" unique_id=581915041]
+offset_left = 292.0
+offset_top = -126.0
+theme_override_font_sizes/font_size = 12
+text = "3  STANDARD 2.25 DU
+Tap / hold / air steer
+Drop + buffer before landing"
+
+[node name="NearLimit" type="Label" parent="Labels" unique_id=702781121]
+offset_left = 498.0
+offset_top = -88.0
+theme_override_font_sizes/font_size = 12
+text = "4  NEAR LIMIT 3.15 DU
+Full jump + steer at apex"
+
+[node name="ShortGap" type="Label" parent="Labels" unique_id=1326115622]
+offset_left = 408.0
+offset_top = 36.0
+theme_override_font_sizes/font_size = 12
+text = "2  COYOTE
+Short gap 1.25 DU
+Long gap to right 3.5 DU"
+
+[node name="Drop" type="Label" parent="Labels" unique_id=1194515093]
+offset_left = 732.0
+offset_top = -70.0
+theme_override_font_sizes/font_size = 12
+text = "5  FALL TEST
+Walk right off edge
+12 DU to safety floor"
+
+[node name="LowerFloor" type="Label" parent="Labels" unique_id=1094103309]
+offset_left = 642.0
+offset_top = 324.0
+theme_override_font_sizes/font_size = 12
+text = "SAFETY FLOOR | no damage
+Watch vy cap at 22 DU/s
+R / 1-5 to repeat tests"
+
+[node name="DebugHUD" type="CanvasLayer" parent="." unique_id=1500263778]
+
+[node name="Panel" type="PanelContainer" parent="DebugHUD" unique_id=1008577090]
+offset_left = 8.0
+offset_top = 284.0
+offset_right = 632.0
+offset_bottom = 356.0
+mouse_filter = 2
+
+[node name="Readout" type="Label" parent="DebugHUD/Panel" unique_id=514887211]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "M1 movement debug"
